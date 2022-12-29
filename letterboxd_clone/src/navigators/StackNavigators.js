@@ -1,5 +1,4 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button } from "react-native";
 import ArtistDetail from "../screens/ArtistDetail";
 import MovieDetail from "../screens/MovieDetail";
 import TabNavigator from "./TabNavigators";

@@ -21,14 +21,14 @@ import store from "./src/stores";
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <NativeBaseProvider>
-        {/* <SafeAreaProvider style={{ backgroundColor: "red" }}> */}
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
-        {/* </SafeAreaProvider> */}
-      </NativeBaseProvider>
-    </Provider>
+    <SafeAreaProvider style={{ backgroundColor: "red" }}>
+      <Provider store={store}>
+        <NativeBaseProvider>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </Provider>
+    </SafeAreaProvider>
   );
 }
