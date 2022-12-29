@@ -17,9 +17,7 @@ export default function MovieCard({ data }) {
   const windowWidth = Dimensions.get("window").width;
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate("MovieList", { name: data.original_title })
-      }
+      onPress={() => navigation.navigate("MovieDetail", { id: data.id })}
     >
       <Box alignItems="center" marginX={1} marginBottom={3}>
         <Box
@@ -58,7 +56,7 @@ export default function MovieCard({ data }) {
                 style={{ marginRight: 3 }}
                 color="yellow"
               />
-              {Math.round((data.vote_average + Number.EPSILON) * 100) / 100}
+              {Math.round((data.vote_average + Number.EPSILON) * 10) / 10}
             </Center>
           </Box>
           <Stack paddingY={2} space={3} height={12} paddingX={1}>

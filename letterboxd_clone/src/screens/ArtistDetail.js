@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function ArtistList() {
+export default function ArtistDetail() {
   return (
     <View>
-      <Text>ArtistList</Text>
+      <Text>ArtistDetail</Text>
     </View>
   );
 }

@@ -23,11 +23,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <NativeBaseProvider>
-        <SafeAreaProvider style={{ backgroundColor: "red" }}>
-          <NavigationContainer>
-            <StackNavigator />
-          </NavigationContainer>
-        </SafeAreaProvider>
+        {/* <SafeAreaProvider style={{ backgroundColor: "red" }}> */}
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+        {/* </SafeAreaProvider> */}
       </NativeBaseProvider>
     </Provider>
   );

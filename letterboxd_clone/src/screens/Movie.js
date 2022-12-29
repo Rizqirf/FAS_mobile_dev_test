@@ -1,7 +1,7 @@
 import { FlatList, Heading, HStack, ScrollView } from "native-base";
 import { useEffect } from "react";
 import { View, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import MovieCard from "../components/MovieCard";
 import { fetchTopMovie } from "../stores/actions";
@@ -10,8 +10,11 @@ export default function Movie({ navigation }) {
   const { topMovies, load } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchTopMovie()), []);
+  useEffect(() => {
+    dispatch(fetchTopMovie());
+  }, []);
   return (
+    // <SafeAreaProvider style={{ backgroundColor: "red" }}>
     <View
       style={{
         flex: 1,
@@ -61,5 +64,6 @@ export default function Movie({ navigation }) {
         </View>
       </ScrollView>
     </View>
+    // </SafeAreaProvider>
   );
 }

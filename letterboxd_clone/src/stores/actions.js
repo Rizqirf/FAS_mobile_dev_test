@@ -12,3 +12,18 @@ export const fetchTopMovie = () => {
     await dispatch({ type: "load/false" });
   };
 };
+
+export const fetchMovieDetail = (id) => {
+  return (dispatch) => {
+    dispatch({ type: "load/true" });
+    return axios
+      .get(
+        `/3/movie/${id}?api_key=${MOVIEDB_KEY}&append_to_response=images,credits`
+      )
+      .then(({ data }) => {
+        dispatch({ type: "movies/fetchMovieDetail", payload: data });
+      })
+      .then((_) => dispatch({ type: "load/false" }))
+      .catch((err) => console.log(err));
+  };
+};

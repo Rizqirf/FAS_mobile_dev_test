@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ArtistList from "../screens/ArtistList";
-import MovieList from "../screens/MovieList";
+import { Button } from "react-native";
+import ArtistDetail from "../screens/ArtistDetail";
+import MovieDetail from "../screens/MovieDetail";
 import TabNavigator from "./TabNavigators";
 
 const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ export default function StackNavigator() {
         headerMode: "screen",
         headerTintColor: "white",
         headerStyle: { backgroundColor: "tomato" },
+        headerShown: true,
       }}
     >
       <Stack.Screen
@@ -23,15 +25,16 @@ export default function StackNavigator() {
         }}
       />
       <Stack.Screen
-        name="MovieList"
-        component={MovieList}
+        name="MovieDetail"
+        component={MovieDetail}
         options={{
           title: "My profile",
+          headerShown: false,
         }}
       />
       <Stack.Screen
-        name="ArtistList"
-        component={ArtistList}
+        name="ArtistDetail"
+        component={ArtistDetail}
         options={{
           gestureEnabled: false,
         }}
