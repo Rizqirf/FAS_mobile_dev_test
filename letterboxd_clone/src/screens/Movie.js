@@ -21,16 +21,14 @@ export default function Movie({ navigation }) {
     <View
       style={{
         flex: 1,
-        // justifyContent: "center",
-        // alignItems: "center",
-        backgroundColor: "blue",
+        backgroundColor: "#181b20",
       }}
     >
-      <StatusBar backgroundColor={"tomato"} />
+      <StatusBar backgroundColor={"#445565"} />
       <SafeAreaView>
         <ScrollView>
           <View>
-            <Heading pt={5} pl={2} pb={2}>
+            <Heading pt={5} pl={2} pb={2} color="#f2f2f3">
               Top Rated
             </Heading>
             <ScrollView
@@ -44,7 +42,7 @@ export default function Movie({ navigation }) {
             </ScrollView>
           </View>
           <View>
-            <Heading pt={5} pl={2} pb={2}>
+            <Heading pt={5} pl={2} pb={2} color="#f2f2f3">
               Top Rated
             </Heading>
             <View

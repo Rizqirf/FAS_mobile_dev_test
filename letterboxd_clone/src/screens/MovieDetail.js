@@ -4,6 +4,7 @@ import {
   Center,
   Divider,
   Heading,
+  HStack,
   Image,
   ScrollView,
 } from "native-base";
@@ -12,6 +13,7 @@ import {
   Button,
   Dimensions,
   ImageBackground,
+  Linking,
   Pressable,
   StatusBar,
   Text,
@@ -24,6 +26,7 @@ import { fetchMovieDetail } from "../stores/actions";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import MovieDetailTab from "../components/MovieDetailTab";
+import MovieCard from "../components/MovieCard";
 
 export default function MovieDetail({ route }) {
   const { id } = route.params;
@@ -43,7 +46,7 @@ export default function MovieDetail({ route }) {
   if (load) return <Text>{id}</Text>;
 
   return (
-    <View>
+    <View style={{ backgroundColor: "#181b20" }}>
       <StatusBar translucent backgroundColor="transparent" />
       <ScrollView>
         <Box>
@@ -61,7 +64,7 @@ export default function MovieDetail({ route }) {
               alt="image"
             >
               <LinearGradient
-                colors={["#00000000", "#fff"]}
+                colors={["#00000000", "#181b20"]}
                 style={{
                   height: "40%",
                   width: "100%",
@@ -74,30 +77,43 @@ export default function MovieDetail({ route }) {
           <Center position="absolute" top={12} left={4}>
             <Ionicons
               name={"arrow-back"}
-              color={"white"}
+              color={"#f2f2f3"}
               size={40}
               onPress={() => navigation.navigate("Home")}
             />
           </Center>
         </Box>
-        <View style={{ paddingHorizontal: 5 }}>
-          <Box flexDirection={"row"} justifyContent="space-between">
+        <Box px="2">
+          <Box flexDirection={"row"} justifyContent="space-between" mt="3">
             <Box width={"68%"}>
-              <Heading>{movieDetail.original_title}</Heading>
-              <Box flexDirection={"row"}>
+              <Heading color={"#f2f2f3"}>{movieDetail.original_title}</Heading>
+              <Box flexDirection={"row"} mt="3">
                 <Box width={"60%"}>
-                  <Text>Directed By</Text>
-                  <Text>
+                  <Text style={{ color: "#8d9cab", fontSize: 16 }}>
+                    Directed By
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#8d9cab",
+                      fontWeight: "700",
+                      fontSize: 16,
+                    }}
+                  >
                     {
                       movieDetail.credits.crew.find(
                         (el) => el.job === "Director"
                       ).name
                     }
                   </Text>
-                  <Box flexDirection={"row"} alignItems={"center"}>
-                    <Text>{movieDetail.release_date.split("-")[0]} </Text>
-                    <Ionicons name="ellipse" size={6} />
-                    <Text> {movieDetail.runtime} mins</Text>
+                  <Box flexDirection={"row"} alignItems={"center"} mt="3">
+                    <Text style={{ color: "#8d9cab", fontSize: 16 }}>
+                      {movieDetail.release_date.split("-")[0]}{" "}
+                    </Text>
+                    <Ionicons name="ellipse" size={6} color="#8d9cab" />
+                    <Text style={{ color: "#8d9cab", fontSize: 16 }}>
+                      {" "}
+                      {movieDetail.runtime} mins
+                    </Text>
                   </Box>
                 </Box>
                 <Box width={"40%"}>
@@ -106,6 +122,7 @@ export default function MovieDetail({ route }) {
                       alignSelf: "center",
                       position: "absolute",
                       bottom: 0,
+                      color: "#f2f2f3",
                     }}
                   >
                     Trailer
@@ -114,43 +131,47 @@ export default function MovieDetail({ route }) {
               </Box>
             </Box>
             <Box width={"28%"}>
-              <AspectRatio w={"100%"} ratio={9 / 16}>
+              <AspectRatio w={"100%"} ratio={2 / 3}>
                 <Image
                   source={{
                     uri: `https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`,
                   }}
                   alt="image"
+                  resizeMode="contain"
                 />
               </AspectRatio>
             </Box>
           </Box>
-          <Box>
-            <Text>{movieDetail.tagline}</Text>
+          <Box mt="3" mb="2">
+            <Text style={{ color: "#8d9cab", marginBottom: 8 }}>
+              {movieDetail.tagline}
+            </Text>
             {isCollapse && (
               <Pressable onPress={() => setCollapse(false)}>
-                <Text numberOfLines={3} ellipsizeMode="tail">
+                <Text
+                  numberOfLines={3}
+                  ellipsizeMode="tail"
+                  style={{ color: "#8d9cab" }}
+                >
                   {movieDetail.overview}
                 </Text>
                 <Ionicons
                   name="ellipsis-horizontal"
                   size={20}
-                  color={"dark"}
+                  color={"#8d9cab"}
                   style={{ alignSelf: "center" }}
                 />
               </Pressable>
             )}
             {!isCollapse && (
               <Pressable onPress={() => setCollapse(true)}>
-                <Text>{movieDetail.overview}</Text>
+                <Text style={{ color: "#8d9cab" }}>{movieDetail.overview}</Text>
               </Pressable>
             )}
           </Box>
-          <Divider />
-        </View>
-        <Box
-          flexDirection={"row"}
-          style={{ alignItems: "center", marginVertical: 10 }}
-        >
+        </Box>
+        <Divider bg="#2C343F" />
+        <Box flexDirection={"row"} style={{ alignItems: "center" }} my="3">
           <Box w={"20"} style={{ flex: 1 }}>
             <Ionicons
               name="star"
@@ -158,12 +179,16 @@ export default function MovieDetail({ route }) {
               color={"yellow"}
               style={{ alignSelf: "center" }}
             />
-            <Text style={{ alignSelf: "center", fontSize: 12 }}>
+            <Text
+              style={{ alignSelf: "center", fontSize: 12, color: "#8d9cab" }}
+            >
               {Math.round((movieDetail.vote_average + Number.EPSILON) * 100) /
                 100}
               /10
             </Text>
-            <Text style={{ alignSelf: "center", fontSize: 10 }}>
+            <Text
+              style={{ alignSelf: "center", fontSize: 10, color: "#8d9cab" }}
+            >
               {movieDetail.vote_count}
             </Text>
           </Box>
@@ -175,29 +200,54 @@ export default function MovieDetail({ route }) {
                 color={"blue"}
                 style={{ alignSelf: "center" }}
               />
-              <Text style={{ alignSelf: "center", fontSize: 14 }}>
+              <Text
+                style={{ alignSelf: "center", fontSize: 14, color: "#8d9cab" }}
+              >
                 Rate this
               </Text>
             </TouchableOpacity>
           </Box>
           <Box w={"20"} style={{ flex: 1 }}>
-            <Text style={{ alignSelf: "center" }}>Critic Reviews</Text>
+            <Text
+              style={{ alignSelf: "center", color: "#8d9cab", fontSize: 14 }}
+            >
+              Critic Reviews
+            </Text>
           </Box>
         </Box>
-        <Divider />
+        <Divider bg="#2C343F" />
         <MovieDetailTab movieDetail={movieDetail} />
-        <View style={{ paddingHorizontal: 5 }}>
-          <Heading size={"md"}>
+        <Box px="2" mt="3">
+          <Heading size={"md"} color={"#8d9cab"}>
+            Get Similar Movies
+          </Heading>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack justifyContent="center" pt={2}>
+              {movieDetail.similar.results.map((el) => (
+                <MovieCard data={el} key={el.id} />
+              ))}
+            </HStack>
+          </ScrollView>
+        </Box>
+        <Divider bg="#2C343F" />
+        <Box px="2" pt={3}>
+          <Heading size={"md"} color={"#8d9cab"}>
             More about "{movieDetail.original_title}"
           </Heading>
-          <TouchableOpacity>
-            <Box flexDirection={"row"} justifyContent="space-between">
-              <Text>View on Imdb</Text>
-              <Ionicons name="arrow-redo" size={16} />
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL(
+                `https://www.imdb.com/title/${movieDetail.imdb_id}`
+              ).catch((err) => console.error("Couldn't load page", err));
+            }}
+          >
+            <Box flexDirection={"row"} justifyContent="space-between" my={3}>
+              <Text style={{ color: "#8d9cab" }}>View on Imdb</Text>
+              <Ionicons name="arrow-redo" size={16} color={"#8d9cab"} />
             </Box>
           </TouchableOpacity>
-          <Divider />
-        </View>
+          <Divider bg="#2C343F" />
+        </Box>
       </ScrollView>
     </View>
   );

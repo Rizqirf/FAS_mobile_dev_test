@@ -5,6 +5,8 @@ const initialValue = {
   topMovies: [],
   allMovies: [],
   movieDetail: {},
+  popularPeople: [],
+  personDetail: {},
   load: true,
 };
 
@@ -16,10 +18,10 @@ function dataReducers(state = initialValue, action) {
       return { ...state, allMovies: action.payload };
     case "movies/fetchMovieDetail":
       return { ...state, movieDetail: action.payload };
-    case "load/true":
-      return { ...state, load: true };
-    case "load/false":
-      return { ...state, load: false };
+    case "people/fetchPopularPeople":
+      return { ...state, popularPeople: action.payload };
+    case "people/fetchPersonDetail":
+      return { ...state, personDetail: action.payload };
     default:
       return state;
   }

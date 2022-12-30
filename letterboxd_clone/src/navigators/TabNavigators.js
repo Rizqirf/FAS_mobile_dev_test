@@ -14,19 +14,21 @@ export default function TabNavigator() {
           let iconName;
 
           if (route.name === "Movie") {
-            iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline";
+            iconName = focused ? "videocam" : "videocam-outline";
           } else if (route.name === "Artist") {
-            iconName = focused ? "ios-list" : "ios-list-outline";
+            iconName = focused ? "people" : "people-outline";
           }
 
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        headerShown: false,
-        tabBarActiveTintColor: "blue",
-        tabBarInactiveTintColor: "gray",
+        headerShown: true,
+        headerTintColor: "#f2f2f3",
+        headerStyle: { backgroundColor: "#445565" },
+        tabBarActiveTintColor: "#00B021",
+        tabBarInactiveTintColor: "#f2f2f3",
+        tabBarActiveBackgroundColor: "#445565",
+        tabBarInactiveBackgroundColor: "#445565",
       })}
     >
       <Tab.Screen name="Movie" component={Movie} />

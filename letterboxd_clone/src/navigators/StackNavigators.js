@@ -12,8 +12,8 @@ export default function StackNavigator() {
       screenOptions={{
         headerMode: "screen",
         headerTintColor: "white",
-        headerStyle: { backgroundColor: "tomato" },
-        headerShown: true,
+        headerStyle: { backgroundColor: "#445565" },
+        headerShown: false,
       }}
     >
       <Stack.Screen
@@ -23,21 +23,8 @@ export default function StackNavigator() {
           title: "Movies",
         }}
       />
-      <Stack.Screen
-        name="MovieDetail"
-        component={MovieDetail}
-        options={{
-          title: "My profile",
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="ArtistDetail"
-        component={ArtistDetail}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
+      <Stack.Screen name="MovieDetail" component={MovieDetail} />
+      <Stack.Screen name="ArtistDetail" component={ArtistDetail} />
     </Stack.Navigator>
   );
 }
