@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Center } from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Artist from "../screens/Artist";
@@ -22,6 +23,7 @@ export default function TabNavigator() {
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
+        headerTitleAlign: "Center",
         headerShown: true,
         headerTintColor: "#f2f2f3",
         headerStyle: { backgroundColor: "#445565" },

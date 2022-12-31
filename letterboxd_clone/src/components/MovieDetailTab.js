@@ -147,37 +147,98 @@ function FirstRoute({ cast, crew }) {
 }
 function SecondRoute({ production_companies, production_countries, titles }) {
   return (
-    <View style={{ flex: 1 }}>
-      <Box>
-        <Text>Studios</Text>
-        {production_companies &&
-          production_companies.map((el) => <Text key={el.id}>{el.name}</Text>)}
+    <>
+      <Box px="2">
+        <Box>
+          <Text
+            style={{
+              color: "#8d9cab",
+              fontSize: 14,
+              textAlign: "justify",
+              letterSpacing: 0.8,
+              fontWeight: "700",
+              marginTop: 10,
+            }}
+          >
+            Studios
+          </Text>
+          {production_companies &&
+            production_companies.map((el) => (
+              <Text key={el.id} style={{ color: "#8d9cab" }}>
+                {el.name}
+              </Text>
+            ))}
+        </Box>
+        <Box>
+          <Text
+            style={{
+              color: "#8d9cab",
+              fontSize: 14,
+              textAlign: "justify",
+              letterSpacing: 0.8,
+              fontWeight: "700",
+              marginTop: 10,
+            }}
+          >
+            Countries
+          </Text>
+          {production_countries &&
+            production_countries.map((el, i) => (
+              <Text key={i} style={{ color: "#8d9cab" }}>
+                {el.name}
+              </Text>
+            ))}
+        </Box>
+        <Box>
+          <Text
+            style={{
+              color: "#8d9cab",
+              fontSize: 14,
+              textAlign: "justify",
+              letterSpacing: 0.8,
+              fontWeight: "700",
+              marginTop: 10,
+            }}
+          >
+            Alternative Titles
+          </Text>
+          {titles &&
+            titles.map((el, i) => (
+              <Text style={{ textAlign: "left", color: "#8d9cab" }} key={i}>
+                {el.title}
+              </Text>
+            ))}
+        </Box>
       </Box>
-      <Box>
-        <Text>Countries</Text>
-        {production_countries &&
-          production_countries.map((el, i) => <Text key={i}>{el.name}</Text>)}
-      </Box>
-      <Box>
-        <Text>Alternative Titles</Text>
-        {titles &&
-          titles.map((el, i) => (
-            <Text style={{ textAlign: "left" }} key={i}>
-              {el.title}
-            </Text>
-          ))}
-      </Box>
-    </View>
+      <Divider bg="#2C343F" mt={3} />
+    </>
   );
 }
 function ThirdRoute({ genres }) {
   return (
-    <View style={{ flex: 1 }}>
-      <Box>
-        <Text>Genres</Text>
-        {genres && genres.map((el) => <Text key={el.id}>{el.name}</Text>)}
+    <>
+      <Box px="2">
+        <Text
+          style={{
+            color: "#8d9cab",
+            fontSize: 14,
+            textAlign: "justify",
+            letterSpacing: 0.8,
+            fontWeight: "700",
+            marginTop: 10,
+          }}
+        >
+          Genres
+        </Text>
+        {genres &&
+          genres.map((el) => (
+            <Text key={el.id} style={{ color: "#8d9cab" }}>
+              {el.name}
+            </Text>
+          ))}
       </Box>
-    </View>
+      <Divider bg="#2C343F" mt={3} />
+    </>
   );
 }
 function DummyRoute() {

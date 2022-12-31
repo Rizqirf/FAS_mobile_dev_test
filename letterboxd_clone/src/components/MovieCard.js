@@ -21,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function MovieCard({ data }) {
   const navigation = useNavigation();
-  const windowWidth = Dimensions.get("window").width;
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("MovieDetail", { id: data.id })}
@@ -30,9 +29,13 @@ export default function MovieCard({ data }) {
         <Box width="32" overflow="hidden">
           <AspectRatio w="100%" ratio={2 / 3} borderRadius={"sm"}>
             <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
-              }}
+              source={
+                data.poster_path
+                  ? {
+                      uri: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
+                    }
+                  : ""
+              }
               alt="image"
               borderRadius={"sm"}
             />

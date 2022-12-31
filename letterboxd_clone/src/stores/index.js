@@ -3,7 +3,9 @@ import thunk from "redux-thunk";
 
 const initialValue = {
   topMovies: [],
-  allMovies: [],
+  upcomingMovies: [],
+  popMovies: [],
+  nowMovies: [],
   movieDetail: {},
   popularPeople: [],
   personDetail: {},
@@ -12,10 +14,14 @@ const initialValue = {
 
 function dataReducers(state = initialValue, action) {
   switch (action.type) {
+    case "movies/fetchNowMovie":
+      return { ...state, nowMovies: action.payload };
+    case "movies/fetchUpcomingMovie":
+      return { ...state, upcomingMovies: action.payload };
     case "movies/fetchTopMovie":
       return { ...state, topMovies: action.payload };
-    case "movies/fetchAllMovie":
-      return { ...state, allMovies: action.payload };
+    case "movies/fetchPopMovie":
+      return { ...state, popMovies: action.payload };
     case "movies/fetchMovieDetail":
       return { ...state, movieDetail: action.payload };
     case "people/fetchPopularPeople":

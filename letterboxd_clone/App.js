@@ -21,7 +21,7 @@ import store from "./src/stores";
 
 export default function App() {
   return (
-    <SafeAreaProvider style={{ backgroundColor: "red" }}>
+    <SafeAreaProvider style={{ backgroundColor: "#181b20" }}>
       <Provider store={store}>
         <NativeBaseProvider>
           <NavigationContainer>

@@ -19,6 +19,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image as image,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -27,15 +28,20 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import MovieDetailTab from "../components/MovieDetailTab";
 import MovieCard from "../components/MovieCard";
+import RatingModal from "../components/RatingModal";
+import loading from "../../assets/loading.gif";
 
 export default function MovieDetail({ route }) {
   const { id } = route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const loadingGIF = image.resolveAssetSource(loading).uri;
+
   const [isCollapse, setCollapse] = useState(true);
   const [load, setLoad] = useState(true);
-  const [isLiked, setLike] = useState(false);
+  const [isOpenRating, setOpenRating] = useState(false);
+  const [rating, setRating] = useState(0);
 
   const { movieDetail } = useSelector((state) => state);
 
@@ -43,7 +49,22 @@ export default function MovieDetail({ route }) {
     dispatch(fetchMovieDetail(id)).then((_) => setLoad(false));
   }, []);
 
-  if (load) return <Text>{id}</Text>;
+  if (load)
+    return (
+      <Center
+        style={{
+          flex: 1,
+          backgroundColor: "#181b20",
+        }}
+      >
+        <Image
+          source={{ uri: loadingGIF }}
+          style={{ height: "100%", width: "80%" }}
+          resizeMode="contain"
+          alt="loading"
+        />
+      </Center>
+    );
 
   return (
     <View style={{ backgroundColor: "#181b20" }}>
@@ -193,19 +214,7 @@ export default function MovieDetail({ route }) {
             </Text>
           </Box>
           <Box w={"20"} style={{ flex: 1 }}>
-            <TouchableOpacity onPress={() => setLike(true)}>
-              <Ionicons
-                name={isLiked ? "star" : "star-outline"}
-                size={24}
-                color={"blue"}
-                style={{ alignSelf: "center" }}
-              />
-              <Text
-                style={{ alignSelf: "center", fontSize: 14, color: "#8d9cab" }}
-              >
-                Rate this
-              </Text>
-            </TouchableOpacity>
+            <RatingModal name={movieDetail.original_title} />
           </Box>
           <Box w={"20"} style={{ flex: 1 }}>
             <Text

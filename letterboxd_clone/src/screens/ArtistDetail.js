@@ -15,12 +15,15 @@ import { fetchPersonDetail } from "../stores/actions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AspectRatio, Box, Center } from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import loading from "../../assets/loading.gif";
 
 export default function ArtistDetail({ route, navigation }) {
   const { personDetail } = useSelector((state) => state);
   const [load, setLoad] = useState(true);
   const dispatch = useDispatch();
   const { id } = route.params;
+
+  const loadingGIF = Image.resolveAssetSource(loading).uri;
 
   useEffect(() => {
     dispatch(fetchPersonDetail(id)).then((_) => setLoad(false));
@@ -51,7 +54,22 @@ export default function ArtistDetail({ route, navigation }) {
     );
   };
 
-  if (load) return <Text>Loading...</Text>;
+  if (load)
+    return (
+      <Center
+        style={{
+          flex: 1,
+          backgroundColor: "#181b20",
+        }}
+      >
+        <Image
+          source={{ uri: loadingGIF }}
+          style={{ height: "100%", width: "80%" }}
+          resizeMode="contain"
+          alt="loading"
+        />
+      </Center>
+    );
 
   return (
     <View>
